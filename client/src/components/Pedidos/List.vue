@@ -20,7 +20,7 @@
                 <td>{{pedido.cliente.nome}}</td>
                 <td>{{pedido.preco_total}}</td>
                 <td><a :href='"/pedidos/" + pedido.id + "/editar"'> Editar</a></td>
-                <td>Excluir</td>
+                <td><a href="" @click.prevent="remove(pedido.id)">Excluir</a></td>
               </tr>
             </tbody>
         </table>
@@ -41,6 +41,9 @@ import PedidosFind from './PedidosFind'
         const querystr = ["valor_min=" + data.valor_min, "valor_max=" + data.valor_max, "cliente=" + data.cliente].join('&')
       
         this.$store.dispatch('getPedido', querystr)  
+      },
+      remove: function (id) {
+        this.$store.dispatch('removePedido', id).then(this.$store.dispatch('getPedidos'));
       }
     },
     computed: {

@@ -75,9 +75,11 @@ class PedidoController extends AppController
      */
     public function add()
     {
-        $pedido = $this->Pedidos->newEntity();
+        $pedido = $this->Pedido->newEntity();
 
-        if ($this->Pedidos->save($user)) {
+        $pedido->cliente_id = $this->request->getData()["data"]["cliente_id"];
+
+        if ($this->Pedido->save($pedido)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
@@ -124,8 +126,8 @@ class PedidoController extends AppController
      */
     public function delete($id = null)
     {
-        $pedido = $this->Pedidos->get($id);
-        if ($this->Pedidos->delete($pedido)) {
+        $pedido = $this->Pedido->get($id);
+        if ($this->Pedido->delete($pedido)) {
             $message = 'Deleted';
         } else {
             $message = 'Error';

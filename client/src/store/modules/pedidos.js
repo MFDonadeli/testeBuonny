@@ -37,15 +37,23 @@ export default {
           context.commit('updatePedidoList', response.data)
         })
       },
+      async addPedidoToSend  (context, params) {
+        let data = JSON.stringify({data: params})
+        let response = await Vue.http.post('http://localhost:8765/api/pedido.json', data)
+        return response.data
+      },
       getItemPedido (context, id) {
         Vue.http.get('http://localhost:8765/api/pedido_item/' + id + ".json").then(response => {
           context.commit('updatePedidoItem', response.data)
         })        
       },
       updateItemToSend (context, params) {
-        console.log(params)
         let data = JSON.stringify({data: params})
         Vue.http.patch('http://localhost:8765/api/pedido_item/' + params.id + ".json", data)
+      },
+      addItemToSend (context, params) {
+        let data = JSON.stringify({data: params})
+        Vue.http.post('http://localhost:8765/api/pedido_item.json', data)
       },
       newPedido (context, data) {
         Vue.http.post('api/pedido', JSON.stringify({data: data}))
@@ -58,11 +66,18 @@ export default {
       removePedido (context, id) {
         let data = {
           'data': {
-            'type': 'pedidos',
             'id': id
           }
         }
-        Vue.http.delete('api/pedido/' + id, JSON.stringify(data))
-      }
+        Vue.http.delete('http://localhost:8765/api/pedido/' + id + ".json", JSON.stringify(data))
+      },
+      removeItem (context, id) {
+        let data = {
+          'data': {
+            'id': id
+          }
+        }
+        Vue.http.delete('http://localhost:8765/api/pedido_item/' + id + ".json", JSON.stringify(data))
+      },
     }
   }

@@ -18,5 +18,3 @@ export default {
   }
 }
 
-//https://github.com/schoolofnetcom/cakephp-vue/blob/master/client/src/components/Accounts/Create.vue
-//https://github.com/schoolofnetcom/cakephp-restful-rev-2/blob/master/src/Controller/AppController.php

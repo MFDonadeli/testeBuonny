@@ -4,8 +4,6 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
 import PedidosList from '../components/Pedidos/List'
-import PedidosCreate from '../components/Pedidos/Create'
-import PedidosView from '../components/Pedidos/View'
 import PedidosEdit from '../components/Pedidos/Edit'
 
 import PedidoItemEdit from '../components/PedidoItem/Edit'
@@ -25,13 +23,8 @@ const routes = [
   },
   {
     path: '/pedidos/novo',
-    name: 'PedidosCreate',
-    component: PedidosCreate
-  },
-  {
-    path: '/pedidos/:id',
-    name: 'PedidosView',
-    component: PedidosView
+    name: 'PedidosEdit',
+    component: PedidosEdit
   },
   {
     path: '/pedidos/:id/editar',
