@@ -51,5 +51,15 @@ class AppController extends Controller
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
+/*
+        $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['*'])
+            ->allowHeaders(['*'])
+            ->build();
+
+        if ($this->request->is('options')) {
+            $this->Auth->allow();
+        } */
     }
 }

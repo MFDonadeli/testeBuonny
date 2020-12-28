@@ -1,7 +1,9 @@
 import pedidos from './modules/pedidos';
+import clientes from './modules/clientes'
 
 export default {
   modules: {
-    pedido: pedidos
+    pedido: pedidos,
+    cliente: clientes
   }
 }

@@ -7,11 +7,11 @@ use App\Controller\AppController;
 /**
  * Pedido Controller
  *
- * @property \App\Model\Table\PedidoTable $Pedido
+ * @property \App\Model\Table\PedidoItemTable $Pedido
  *
  * @method \App\Model\Entity\Pedido[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class PedidoController extends AppController
+class PedidoItemController extends AppController
 {
     /**
      * Index method
@@ -52,18 +52,18 @@ class PedidoController extends AppController
     /**
      * View method
      *
-     * @param string|null $id Pedido id.
+     * @param string|null $id PedidoItem id.
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $pedido = $this->Pedido->get($id, [
-            'contain' => ['Cliente', 'Produto'],
+        $pedidoitem = $this->PedidoItem->get($id, [
+            'contain' => ['Pedido' => ['Cliente'], 'Produto'],
         ]);
         
         $this->set([
-            'data' => $pedido,
+            'data' => $pedidoitem,
             '_serialize' => ['data']
         ]);
     }
@@ -77,7 +77,7 @@ class PedidoController extends AppController
     {
         $pedido = $this->Pedidos->newEntity();
 
-        if ($this->Pedidos->save($user)) {
+        if ($this->Pedidos->save($pedido)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
@@ -94,15 +94,18 @@ class PedidoController extends AppController
     /**
      * Edit method
      *
-     * @param string|null $id Pedido id.
+     * @param string|null $id PedidoItem id.
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $pedido = $this->Pedidos->get($id);
-        $pedido = $this->Pedidos->patchEntity($pedido, $this->request->getData());
-        if ($this->Pedidos->save($user)) {
+        $pedido = $this->PedidoItem->get($id);
+        //$pedido = $this->PedidoItem->patchEntity($pedido, $this->request->getData());
+         
+        $pedido->quantidade = $this->request->getData()["data"]["quantidade"];
+
+        if ($this->PedidoItem->save($pedido)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
@@ -118,7 +121,7 @@ class PedidoController extends AppController
     /**
      * Delete method
      *
-     * @param string|null $id Pedido id.
+     * @param string|null $id PedidoItem id.
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */

@@ -107,4 +107,6 @@ Router::scope('/', function (RouteBuilder $routes) {
  Router::scope('/api', ['prefix' => 'api'], function ($routes) {
      $routes->setExtensions(['json']);
      $routes->resources('Pedido');
+     $routes->resources('Cliente');
+     $routes->resources('PedidoItem');
  });

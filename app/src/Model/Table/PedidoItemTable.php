@@ -76,8 +76,8 @@ class PedidoItemTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['pedido_id'], 'Pedidos'));
-        $rules->add($rules->existsIn(['produto_id'], 'Produtos'));
+        $rules->add($rules->existsIn(['pedido_id'], 'Pedido'), ['errorField' => 'pedido_id']);
+        $rules->add($rules->existsIn(['produto_id'], 'Produto'), ['errorField' => 'produto_id']);
 
         return $rules;
     }
